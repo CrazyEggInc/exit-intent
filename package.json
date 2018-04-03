@@ -4,7 +4,8 @@
   "description": "Exit intent takeover.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production"
+    "start": "./node_modules/.bin/webpack-dev-server --mode development",
+    "build": "./node_modules/.bin/webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -20,12 +21,13 @@
     "elm": "^0.18.0",
     "elm-webpack-loader": "^4.5.0",
     "webpack": "^4.4.1",
-    "webpack-cli": "^2.0.13"
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "^3.1.1",
+    "uglifyjs-webpack-plugin": "^1.2.4"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.6.1",
-    "uglifyjs-webpack-plugin": "^1.2.4"
+    "babel-preset-env": "^1.6.1"
   }
 }

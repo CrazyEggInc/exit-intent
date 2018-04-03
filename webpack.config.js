@@ -15,7 +15,7 @@ module.exports = {
 	entry: './index',
 
 	output: {
-		filename: '[name].bundle.js',
+		filename: 'exit-intent.js',
 		path: path.resolve(__dirname, 'dist')
 	},
 
@@ -34,7 +34,7 @@ module.exports = {
 				test: /\.elm$/,
 				exclude: [/elm-stuff/, /node_modules/],
 				use: {
-					loader: 'elm-webpack',
+					loader: 'elm-webpack-loader',
 					options: {}
 				}
 			}
