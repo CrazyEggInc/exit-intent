@@ -27,16 +27,14 @@ model.on('close', function() {
 
 * `git clone https://github.com/CrazyEggInc/exit-intent.git`
 * `cd exit-intent`
+* `yarn install`
 
 ## Running
 
-* compile with `elm-make ExitIntent.elm --output=dist/exit_intent.js`
-  and open `index.html`
+Run `yarn run start`, this will boot a development server that compiles the library and makes it available at `http://localhost:8080/exit-intent.js`
 
-  or
-
-* run `elm-reactor`
-  and open `localhost:8000/index.html`
+## Build
+`ExitIntent` is distributed as a NPM package. Run `yarn run build` to build a new version of the library. Commit and push the change, then update the projects that use `ExitIntent`.
 
 ## Further Reading / Useful Links
 
