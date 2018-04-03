@@ -16,7 +16,9 @@ module.exports = {
 
 	output: {
 		filename: 'exit-intent.js',
-		path: path.resolve(__dirname, 'dist')
+		path: path.resolve(__dirname, 'dist'),
+		library: "ExitIntent",
+		libraryExport: "default"
 	},
 
 	module: {
@@ -27,7 +29,7 @@ module.exports = {
 				loader: 'babel-loader',
 
 				options: {
-					presets: ['env']
+					presets: ['es2015']
 				}
 			},
 			{

@@ -18,12 +18,13 @@
   },
   "homepage": "https://github.com/CrazyEggInc/exit-intent#readme",
   "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
     "elm": "^0.18.0",
     "elm-webpack-loader": "^4.5.0",
+    "uglifyjs-webpack-plugin": "^1.2.4",
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13",
-    "webpack-dev-server": "^3.1.1",
-    "uglifyjs-webpack-plugin": "^1.2.4"
+    "webpack-dev-server": "^3.1.1"
   },
   "dependencies": {
     "babel-core": "^6.26.0",
