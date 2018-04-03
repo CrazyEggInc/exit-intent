@@ -1,0 +1,22 @@
+{
+  "name": "exit-intent",
+  "version": "1.0.0",
+  "description": "Exit intent takeover.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CrazyEggInc/exit-intent.git"
+  },
+  "author": "Crazy Egg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CrazyEggInc/exit-intent/issues"
+  },
+  "homepage": "https://github.com/CrazyEggInc/exit-intent#readme",
+  "devDependencies": {
+    "elm": "^0.18.0"
+  }
+}
