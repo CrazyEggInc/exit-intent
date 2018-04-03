@@ -11,7 +11,7 @@ To install Elm follow these [steps](https://guide.elm-lang.org/install.html)
 
 ## Running
 
-* compile with `elm-make exitIntent.elm --output=dist/exit_intent.js`
+* compile with `elm-make ExitIntent.elm --output=dist/exit_intent.js`
   and open `index.html`
 
   or
