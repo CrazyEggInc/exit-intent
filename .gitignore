@@ -3,3 +3,10 @@ elm-stuff
 
 # compiled files
 dist
+
+
+# node_modules
+node_modules
+
+# logs
+yarn-error.log
