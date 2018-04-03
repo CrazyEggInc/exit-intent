@@ -18,6 +18,7 @@
   "homepage": "https://github.com/CrazyEggInc/exit-intent#readme",
   "devDependencies": {
     "elm": "^0.18.0",
+    "elm-webpack-loader": "^4.5.0",
     "webpack": "^4.4.1",
     "webpack-cli": "^2.0.13"
   },
