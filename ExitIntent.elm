@@ -73,14 +73,15 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    if model.isVisible then
-        div [ class "modal" ]
-            [ headline model.content
-            , actions model.content.actions
-            , closeButton
-            ]
-    else
-        text ""
+    case model.isVisible of
+        True ->
+            div [ class "modal" ]
+                [ headline model.content
+                , actions model.content.actions
+                , closeButton
+                ]
+        _ ->
+            text ""
 
 headline : Content -> Html Msg
 headline content =
