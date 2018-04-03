@@ -2,7 +2,7 @@
   "name": "exit-intent",
   "version": "1.0.0",
   "description": "Exit intent takeover.",
-  "main": "index.js",
+  "main": "dist/exit-intent.js",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --mode development",
     "build": "./node_modules/.bin/webpack --mode production"

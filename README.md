@@ -4,6 +4,25 @@
 
 To install Elm follow these [steps](https://guide.elm-lang.org/install.html)
 
+## Usage
+
+```
+// Create a new modal with content
+var modal = new ExitIntent({});
+
+// Show modal
+model.show();
+
+// Hide modal
+model.hide();
+
+// Listen for events
+model.on('close', function() {
+  // Code
+});
+```
+
+
 ## Installation
 
 * `git clone https://github.com/CrazyEggInc/exit-intent.git`
