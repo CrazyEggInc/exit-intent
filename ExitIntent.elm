@@ -1,6 +1,5 @@
 port module Main exposing (..)
 
-
 import Html exposing (Html, a, div, h1, p, program, text)
 import Html.Attributes exposing (class, href, style)
 import Html.Events exposing (onClick)
@@ -100,6 +99,7 @@ modal model =
                 , actions model.content.actions
                 , closeButton
                 ]
+
         _ ->
             text ""
 
@@ -127,45 +127,47 @@ closeButton =
     a [ onClick (UpdateVisible False), class "modal-close", style closeModalStyle ] [ text "x" ]
 
 
+
 -- Styles
 
-modalStyle : List (String, String)
+
+modalStyle : List ( String, String )
 modalStyle =
-    [ ("width", "500px")
-    , ("height", "400px")
-    , ("position", "absolute")
-    , ("top", "50%")
-    , ("left", "50%")
-    , ("margin-top", "-200px")
-    , ("margin-left", "-250px")
-    , ("background-color", "white")
-    , ("border", "1px solid darkgray")
-    , ("border-radius", "10px")
-    , ("z-index", "99")
-    , ("text-align", "center")
+    [ ( "width", "500px" )
+    , ( "height", "400px" )
+    , ( "position", "absolute" )
+    , ( "top", "50%" )
+    , ( "left", "50%" )
+    , ( "margin-top", "-200px" )
+    , ( "margin-left", "-250px" )
+    , ( "background-color", "white" )
+    , ( "border", "1px solid darkgray" )
+    , ( "border-radius", "10px" )
+    , ( "z-index", "99" )
+    , ( "text-align", "center" )
     ]
 
 
-closeModalStyle : List(String, String)
+closeModalStyle : List ( String, String )
 closeModalStyle =
-    [ ("position", "absolute")
-    , ("top", "10px")
-    , ("right", "25px")
-    , ("content", "✕")
-    , ("cursor", "pointer")
+    [ ( "position", "absolute" )
+    , ( "top", "10px" )
+    , ( "right", "25px" )
+    , ( "content", "✕" )
+    , ( "cursor", "pointer" )
     ]
 
 
-actionsContainerStyle : List(String, String)
+actionsContainerStyle : List ( String, String )
 actionsContainerStyle =
-    [ ("position", "absolute")
-    , ("bottom", "30px")
+    [ ( "position", "absolute" )
+    , ( "bottom", "30px" )
     ]
 
 
-actionStyle : List(String, String)
+actionStyle : List ( String, String )
 actionStyle =
-    [ ("padding", "10px")
-    , ("border", "1px solid lightgray")
-    , ("border-radius", "10px")
+    [ ( "padding", "10px" )
+    , ( "border", "1px solid lightgray" )
+    , ( "border-radius", "10px" )
     ]
