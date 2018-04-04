@@ -2,8 +2,10 @@ import Elm from './elm/Main.elm';
 
 class ExitIntent {
   constructor(modalContent = {}) {
+
     const modal = Elm.Main.fullscreen();
-    modal.ports.modalContent = modalContent;
+
+    modal.ports.modalContent.send(modalContent);
 
     this.modal = modal;
   }
