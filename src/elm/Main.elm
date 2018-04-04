@@ -1,7 +1,7 @@
 port module Main exposing (..)
 
-import Html exposing (Html, a, div, h1, p, program, text, img, ul, li)
-import Html.Attributes exposing (class, href, style, src)
+import Html exposing (Html, a, div, h1, img, li, p, program, text, ul)
+import Html.Attributes exposing (class, href, src, style)
 import Html.Events exposing (onClick)
 
 
@@ -59,6 +59,7 @@ initialImage : Image
 initialImage =
     Image ""
 
+
 init : ( Model, Cmd Msg )
 init =
     ( initialModel, Cmd.none )
@@ -96,8 +97,12 @@ view model =
 modal : Model -> Html Msg
 modal model =
     case model.isVisible of
-        True -> div [ class "modal", style modalStyle ] [ modalContainer model.modal, closeButton ]
-        _    -> text ""
+        True ->
+            div [ class "modal", style modalStyle ] [ modalContainer model.modal, closeButton ]
+
+        _ ->
+            text ""
+
 
 modalContainer : Modal -> Html Msg
 modalContainer content =
@@ -105,6 +110,7 @@ modalContainer content =
         [ contentLeft content.image
         , contentRight content
         ]
+
 
 contentLeft : Image -> Html Msg
 contentLeft image =
@@ -119,6 +125,7 @@ contentRight content =
         , contentWrapper content
         , actionsWrapper content.actions
         ]
+
 
 imageWrapper : Image -> Html Msg
 imageWrapper image =
@@ -141,6 +148,7 @@ contentWrapper modal =
     div [ class "content-wrapper", style contentWrapperStyle ]
         [ contentBody modal.content ]
 
+
 contentBody : String -> Html Msg
 contentBody content =
     p [ style contentBodyStyles ] [ text content ]
@@ -161,6 +169,7 @@ closeButton =
     a [ onClick (UpdateVisible False), class "modal-close", style closeModalStyle ] [ text "x" ]
 
 
+
 -- Styles
 
 
@@ -173,24 +182,26 @@ modalStyle =
     , ( "left", "0" )
     , ( "background-color", "#0055B1" )
     , ( "z-index", "99" )
-    , ( "color", "white")
-    , ("background-image", "url(https://www.crazyegg.com/assets/images/recordings/stars-lower.svg)")
-    , ("font-family", "proxima-nova")
+    , ( "color", "white" )
+    , ( "background-image", "url(https://www.crazyegg.com/assets/images/recordings/stars-lower.svg)" )
+    , ( "font-family", "proxima-nova" )
     ]
 
 
 headlineWrapperStyle : List ( String, String )
 headlineWrapperStyle =
-    [ ("margin-top", "50px") ]
+    [ ( "margin-top", "50px" ) ]
 
 
 headlineStyle : List ( String, String )
 headlineStyle =
-    [ ("margin-bottom", "15px")]
+    [ ( "margin-bottom", "15px" ) ]
+
 
 contentBodyStyles : List ( String, String )
 contentBodyStyles =
     []
+
 
 modalContainerStyle : List ( String, String )
 modalContainerStyle =
@@ -201,9 +212,11 @@ modalContainerStyle =
     , ( "margin-top", "20%" )
     ]
 
+
 contentWrapperStyle : List ( String, String )
 contentWrapperStyle =
     []
+
 
 closeModalStyle : List ( String, String )
 closeModalStyle =
@@ -214,7 +227,8 @@ closeModalStyle =
     , ( "cursor", "pointer" )
     ]
 
-contentLeftStyle: List ( String, String )
+
+contentLeftStyle : List ( String, String )
 contentLeftStyle =
     [ ( "width", "40%" )
     , ( "height", "100%" )
@@ -222,23 +236,23 @@ contentLeftStyle =
     ]
 
 
-contentRightStyle: List ( String, String )
+contentRightStyle : List ( String, String )
 contentRightStyle =
-  [ ( "width", "60%" )
-  , ( "height", "100%" )
-  , ( "float", "left" )
-  , ( "position", "relative" )
-  , ( "padding", "15px" )
-  , ( "box-sizing", "border-box")
-  , ( "padding-left", "50px" )
-  ]
+    [ ( "width", "60%" )
+    , ( "height", "100%" )
+    , ( "float", "left" )
+    , ( "position", "relative" )
+    , ( "padding", "15px" )
+    , ( "box-sizing", "border-box" )
+    , ( "padding-left", "50px" )
+    ]
 
 
 imageStyle : List ( String, String )
 imageStyle =
-    [ ("width", "280px" )
-    , ("float", "right" )
-    , ("margin-top", "25%" )
+    [ ( "width", "280px" )
+    , ( "float", "right" )
+    , ( "margin-top", "25%" )
     ]
 
 
@@ -247,14 +261,14 @@ actionsContainerStyle =
     [ ( "position", "absolute" )
     , ( "display", "block" )
     , ( "bottom", "70px" )
-    , ("padding-left", "0" )
+    , ( "padding-left", "0" )
     ]
 
 
 actionStyle : List ( String, String )
 actionStyle =
     [ ( "padding", "10px" )
-    , ( "width", "200px")
+    , ( "width", "200px" )
     , ( "border-radius", "3px" )
     , ( "list-style", "none" )
     , ( "margin-top", "15px" )
