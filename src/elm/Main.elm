@@ -1,28 +1,27 @@
 port module Main exposing (..)
 
-import Html exposing (Html, a, div, h1, p, program, text)
-import Html.Attributes exposing (class, href, style)
+import Html exposing (Html, a, div, h1, p, program, text, img, ul, li)
+import Html.Attributes exposing (class, href, style, src)
 import Html.Events exposing (onClick)
 
 
 type alias Model =
     { isVisible : Bool
-    , content : Content
+    , modal : Modal
     }
 
 
-type alias Content =
+type alias Modal =
     { headline : String
-    , subHeadline : String
+    , content : String
     , actions : List Action
-    , image : Maybe Image
+    , image : Image
     }
 
 
 type alias Action =
     { text : String
     , location : String
-    , track : Bool
     }
 
 
@@ -32,7 +31,7 @@ type alias Image =
 
 
 type Msg
-    = UpdateContent Content
+    = UpdateModal Modal
     | UpdateVisible Bool
 
 
@@ -48,13 +47,17 @@ main =
 
 initialModel : Model
 initialModel =
-    Model False initialContent
+    Model False initialModal
 
 
-initialContent : Content
-initialContent =
-    Content "" "" [] Nothing
+initialModal : Modal
+initialModal =
+    Modal "" "" [] initialImage
 
+
+initialImage : Image
+initialImage =
+    Image ""
 
 init : ( Model, Cmd Msg )
 init =
@@ -64,12 +67,12 @@ init =
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.batch
-        [ modalContent UpdateContent
+        [ modalContent UpdateModal
         , modalVisible UpdateVisible
         ]
 
 
-port modalContent : (Content -> msg) -> Sub msg
+port modalContent : (Modal -> msg) -> Sub msg
 
 
 port modalVisible : (Bool -> msg) -> Sub msg
@@ -78,8 +81,8 @@ port modalVisible : (Bool -> msg) -> Sub msg
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        UpdateContent content ->
-            ( { model | content = content }, Cmd.none )
+        UpdateModal modal ->
+            ( { model | modal = modal }, Cmd.none )
 
         UpdateVisible bool ->
             ( { model | isVisible = bool }, Cmd.none )
@@ -93,33 +96,64 @@ view model =
 modal : Model -> Html Msg
 modal model =
     case model.isVisible of
-        True ->
-            div [ class "modal", style modalStyle ]
-                [ headline model.content
-                , actions model.content.actions
-                , closeButton
-                ]
+        True -> div [ class "modal", style modalStyle ] [ modalContainer model.modal, closeButton ]
+        _    -> text ""
 
-        _ ->
-            text ""
-
-
-headline : Content -> Html Msg
-headline content =
-    div [ class "headline-wrapper" ]
-        [ h1 [] [ text content.headline ]
-        , p [] [ text content.subHeadline ]
+modalContainer : Modal -> Html Msg
+modalContainer content =
+    div [ class "modal-content", style modalContainerStyle ]
+        [ contentLeft content.image
+        , contentRight content
         ]
 
+contentLeft : Image -> Html Msg
+contentLeft image =
+    div [ class "content-left", style contentLeftStyle ]
+        [ imageWrapper image ]
 
-actions : List Action -> Html Msg
-actions actions =
-    div [ class "actions", style actionsContainerStyle ] (List.map action actions)
+
+contentRight : Modal -> Html Msg
+contentRight content =
+    div [ class "content-right", style contentRightStyle ]
+        [ headlineWrapper content
+        , contentWrapper content
+        , actionsWrapper content.actions
+        ]
+
+imageWrapper : Image -> Html Msg
+imageWrapper image =
+    img [ src image.source, style imageStyle ] []
+
+
+headlineWrapper : Modal -> Html Msg
+headlineWrapper content =
+    div [ class "headline-wrapper", style headlineWrapperStyle ]
+        [ headline content.headline ]
+
+
+headline : String -> Html Msg
+headline headlineText =
+    h1 [ style headlineStyle ] [ text headlineText ]
+
+
+contentWrapper : Modal -> Html Msg
+contentWrapper modal =
+    div [ class "content-wrapper", style contentWrapperStyle ]
+        [ contentBody modal.content ]
+
+contentBody : String -> Html Msg
+contentBody content =
+    p [ style contentBodyStyles ] [ text content ]
+
+
+actionsWrapper : List Action -> Html Msg
+actionsWrapper actions =
+    ul [ class "actions", style actionsContainerStyle ] (List.map action actions)
 
 
 action : Action -> Html Msg
 action action =
-    a [ href action.location, style actionStyle ] [ text action.text ]
+    li [ href action.location, style actionStyle ] [ text action.text ]
 
 
 closeButton : Html Msg
@@ -127,26 +161,49 @@ closeButton =
     a [ onClick (UpdateVisible False), class "modal-close", style closeModalStyle ] [ text "x" ]
 
 
-
 -- Styles
 
 
 modalStyle : List ( String, String )
 modalStyle =
-    [ ( "width", "500px" )
-    , ( "height", "400px" )
-    , ( "position", "absolute" )
-    , ( "top", "50%" )
-    , ( "left", "50%" )
-    , ( "margin-top", "-200px" )
-    , ( "margin-left", "-250px" )
-    , ( "background-color", "white" )
-    , ( "border", "1px solid darkgray" )
-    , ( "border-radius", "10px" )
+    [ ( "width", "100%" )
+    , ( "height", "100%" )
+    , ( "position", "fixed" )
+    , ( "top", "0" )
+    , ( "left", "0" )
+    , ( "background-color", "#0055B1" )
     , ( "z-index", "99" )
-    , ( "text-align", "center" )
+    , ( "color", "white")
+    , ("background-image", "url(https://www.crazyegg.com/assets/images/recordings/stars-lower.svg)")
+    , ("font-family", "proxima-nova")
     ]
 
+
+headlineWrapperStyle : List ( String, String )
+headlineWrapperStyle =
+    [ ("margin-top", "50px") ]
+
+
+headlineStyle : List ( String, String )
+headlineStyle =
+    [ ("margin-bottom", "15px")]
+
+contentBodyStyles : List ( String, String )
+contentBodyStyles =
+    []
+
+modalContainerStyle : List ( String, String )
+modalContainerStyle =
+    [ ( "width", "60%" )
+    , ( "height", "400px" )
+    , ( "margin-left", "auto" )
+    , ( "margin-right", "auto" )
+    , ( "margin-top", "20%" )
+    ]
+
+contentWrapperStyle : List ( String, String )
+contentWrapperStyle =
+    []
 
 closeModalStyle : List ( String, String )
 closeModalStyle =
@@ -157,17 +214,51 @@ closeModalStyle =
     , ( "cursor", "pointer" )
     ]
 
+contentLeftStyle: List ( String, String )
+contentLeftStyle =
+    [ ( "width", "40%" )
+    , ( "height", "100%" )
+    , ( "float", "left" )
+    ]
+
+
+contentRightStyle: List ( String, String )
+contentRightStyle =
+  [ ( "width", "60%" )
+  , ( "height", "100%" )
+  , ( "float", "left" )
+  , ( "position", "relative" )
+  , ( "padding", "15px" )
+  , ( "box-sizing", "border-box")
+  , ( "padding-left", "50px" )
+  ]
+
+
+imageStyle : List ( String, String )
+imageStyle =
+    [ ("width", "280px" )
+    , ("float", "right" )
+    , ("margin-top", "25%" )
+    ]
+
 
 actionsContainerStyle : List ( String, String )
 actionsContainerStyle =
     [ ( "position", "absolute" )
-    , ( "bottom", "30px" )
+    , ( "display", "block" )
+    , ( "bottom", "70px" )
+    , ("padding-left", "0" )
     ]
 
 
 actionStyle : List ( String, String )
 actionStyle =
     [ ( "padding", "10px" )
-    , ( "border", "1px solid lightgray" )
-    , ( "border-radius", "10px" )
+    , ( "width", "200px")
+    , ( "border-radius", "3px" )
+    , ( "list-style", "none" )
+    , ( "margin-top", "15px" )
+    , ( "box-shadow", "0px 2px 0px grey" )
+    , ( "text-align", "center" )
+    , ( "background-color", "#0086E6" )
     ]
