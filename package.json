@@ -4,7 +4,7 @@
   "description": "Exit intent takeover.",
   "main": "dist/exit-intent.js",
   "scripts": {
-    "start": "./node_modules/.bin/webpack-dev-server --mode development",
+    "start": "./node_modules/.bin/webpack-dev-server --content-base dev/ --mode development",
     "build": "./node_modules/.bin/webpack --mode production"
   },
   "repository": {
