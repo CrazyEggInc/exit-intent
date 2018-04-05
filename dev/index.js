@@ -73,8 +73,8 @@ const actions = [
 const image = {
   source: 'https://www.crazyegg.com/assets/images/recordings/astronaut@2x.png',
   styles: {
-    width: '10px',
-    height: '15px'
+    width: '240px',
+    'margin-top': '20px'
   }
 };
 
@@ -89,7 +89,6 @@ content = {
   className: "",
   styles: {}
 };
-
 
 const modalContent = {
   headline: headline,

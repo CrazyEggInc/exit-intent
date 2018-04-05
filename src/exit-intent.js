@@ -20,6 +20,10 @@ class ExitIntent {
       if (Object.keys(currentProp).includes('styles')) {
         parsedContentProps[prop].styles = this.mapStylesToArray(currentProp.styles);
       }
+
+      if (prop === 'globalStyles') {
+        parsedContentProps.globalStyles = this.mapStylesToArray(contentProps[prop]);
+      }
     }
 
     return parsedContentProps;
