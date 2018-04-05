@@ -6,27 +6,34 @@ class ExitIntent {
 
     const modal = Elm.Main.fullscreen();
 
-    modal.ports.modalContent.send(modalContent);
+    modal.ports.modalContent.send(parsedModalContent);
 
     this.modal = modal;
   }
 
   parseContent(contentProps) {
-    let parsedContentProps = contentProps;
-
-    for(let prop in contentProps) {
+    for (let prop in contentProps) {
       let currentProp = contentProps[prop];
 
-      if (Object.keys(currentProp).includes('styles')) {
-        parsedContentProps[prop].styles = this.mapStylesToArray(currentProp.styles);
-      }
-
-      if (prop === 'globalStyles') {
-        parsedContentProps.globalStyles = this.mapStylesToArray(contentProps[prop]);
+      if (Array.isArray(currentProp)) {
+        for (let item in currentProp) {
+          // currentProp[item] is a hash of style properties
+          item = this.parseHashContent(currentProp[item]);
+        }
+      } else {
+        currentProp = this.parseHashContent(currentProp);
       }
     }
 
-    return parsedContentProps;
+    return contentProps;
+  }
+
+  parseHashContent(hash) {
+    if (Object.keys(hash).includes('styles')) {
+      hash.styles = this.mapStylesToArray(hash.styles);
+    }
+
+    return hash;
   }
 
   // -> styles: { width: '10px;', height: '20px;' }

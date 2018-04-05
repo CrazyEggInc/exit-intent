@@ -16,8 +16,12 @@ type alias Modal =
     , content : Text
     , actions : List Action
     , image : Image
-    , globalStyles : List Style
+    , globalConfig : GlobalConfig
     }
+
+
+type alias GlobalConfig =
+    { styles : List Style }
 
 
 type alias Text =
@@ -65,7 +69,7 @@ initialModel =
 
 initialModal : Modal
 initialModal =
-    Modal initialHeadline initialContent [] initialImage []
+    Modal initialHeadline initialContent [] initialImage initialGlobalConfig
 
 
 initialHeadline : Text
@@ -81,6 +85,11 @@ initialContent =
 initialImage : Image
 initialImage =
     Image "" []
+
+
+initialGlobalConfig : GlobalConfig
+initialGlobalConfig =
+    GlobalConfig []
 
 
 init : ( Model, Cmd Msg )
@@ -121,7 +130,7 @@ modal : Model -> Html Msg
 modal model =
     case model.isVisible of
         True ->
-            div [ class "modal", style (modalStyle model.modal.globalStyles) ] [ modalContainer model.modal, closeButton ]
+            div [ class "modal", style (modalStyle model.modal.globalConfig) ] [ modalContainer model.modal, closeButton ]
 
         _ ->
             text ""
@@ -196,8 +205,8 @@ closeButton =
 -- Styles
 
 
-modalStyle : List Style -> List ( String, String )
-modalStyle globalStyles =
+modalStyle : GlobalConfig -> List ( String, String )
+modalStyle globalConfig =
     let
         defaultStyles =
             [ ( "width", "100%" )
@@ -208,7 +217,7 @@ modalStyle globalStyles =
             , ( "z-index", "99" )
             ]
     in
-    List.concat [ defaultStyles, globalStyles ]
+    List.concat [ defaultStyles, globalConfig.styles ]
 
 
 headlineWrapperStyle : List ( String, String )
@@ -310,6 +319,7 @@ actionStyle styles =
             , ( "list-style", "none" )
             , ( "margin-top", "15px" )
             , ( "text-align", "center" )
+            , ( "cursor", "pointer" )
             ]
     in
     List.concat [ defaultStyles, styles ]

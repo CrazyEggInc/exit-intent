@@ -51,18 +51,18 @@ const actions = [
   {
     text: 'Take me to the Free Plan',
     location: 'https://google.com',
-    styles: [
-      ["box-shadow", "0px 2px 0px #00548C"],
-      ["background-color", "#0086E6"]
-    ]
+    styles: {
+      'box-shadow': '0px 2px 0px #00548C',
+      'background-color': '#0086E6'
+    }
   },
   {
     text: "I'm not interested",
     location: 'https://google.com',
-    styles: [
-      ["box-shadow", "0px 2px 0px #768EA1"],
-      ["background-color", "#A2B9CA"]
-    ]
+    styles: {
+      'box-shadow': '0px 2px 0px #768EA1',
+      'background-color': '#A2B9CA'
+    }
   }
 ];
 
@@ -91,11 +91,13 @@ const modalContent = {
   content: content,
   actions: actions,
   image: image,
-  globalStyles: {
-    'font-family': 'proxima-nova',
-    color: 'white',
-    'background-color': '#0055B1',
-    'background-image': 'url(https://www.crazyegg.com/assets/images/recordings/stars-lower.svg)'
+  globalConfig: {
+    styles: {
+      'font-family': 'proxima-nova',
+      color: 'white',
+      'background-color': '#0055B1',
+      'background-image': 'url(https://www.crazyegg.com/assets/images/recordings/stars-lower.svg)'
+    }
   }
 };
 
