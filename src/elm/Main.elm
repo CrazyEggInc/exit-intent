@@ -23,6 +23,7 @@ type alias Modal =
 type alias Action =
     { text : String
     , location : String
+    , styles : List Style
     }
 
 
@@ -166,7 +167,7 @@ actionsWrapper actions =
 
 action : Action -> Html Msg
 action action =
-    li [ href action.location, style actionStyle ] [ text action.text ]
+    li [ href action.location, style (actionStyle action.styles) ] [ text action.text ]
 
 
 closeButton : Html Msg
@@ -270,14 +271,16 @@ actionsContainerStyle =
     ]
 
 
-actionStyle : List ( String, String )
-actionStyle =
-    [ ( "padding", "10px" )
-    , ( "width", "200px" )
-    , ( "border-radius", "3px" )
-    , ( "list-style", "none" )
-    , ( "margin-top", "15px" )
-    , ( "box-shadow", "0px 2px 0px grey" )
-    , ( "text-align", "center" )
-    , ( "background-color", "#0086E6" )
-    ]
+actionStyle : List Style -> List ( String, String )
+actionStyle styles =
+    let
+        defaultStyles =
+            [ ( "padding", "10px" )
+            , ( "width", "200px" )
+            , ( "border-radius", "3px" )
+            , ( "list-style", "none" )
+            , ( "margin-top", "15px" )
+            , ( "text-align", "center" )
+            ]
+    in
+    List.concat [ defaultStyles, styles ]
