@@ -193,7 +193,9 @@ actionsWrapper actions =
 
 action : Action -> Html Msg
 action action =
-    li [ href action.location, style (actionStyle action.styles) ] [ text action.text ]
+    li [ href action.location, style (actionStyle action.styles) ]
+        [ a [ href action.location ] [ text action.text ]
+        ]
 
 
 closeButton : Html Msg
