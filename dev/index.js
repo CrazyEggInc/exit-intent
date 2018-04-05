@@ -72,30 +72,36 @@ const actions = [
 
 const image = {
   source: 'https://www.crazyegg.com/assets/images/recordings/astronaut@2x.png',
-  styles: []
+  styles: {
+    width: '10px',
+    height: '15px'
+  }
 };
 
 const headline = {
   text: 'Feeling lost?',
-  styles: []
+  className: "",
+  styles: {}
 };
 
-const content = {
-  text: 'Not sure which plan to pick? Try our Free Plan to get a taste of what Crazy Egg has to offer and see how we can improve your website, instantly. No credit card required. URUGUAY!',
-  styles: []
-}
+content = {
+  text: 'Not sure which plan to pick? Try our Free Plan to get a taste of what Crazy Egg has to offer and see how we can improve your website, instantly.No credit card required.',
+  className: "",
+  styles: {}
+};
+
 
 const modalContent = {
   headline: headline,
   content: content,
   actions: actions,
   image: image,
-  globalStyles: [
-    ["font-family", "proxima-nova"],
-    ["color", "white"],
-    ["background-color", "#0055B1"],
-    ["background-image", "url(https://www.crazyegg.com/assets/images/recordings/stars-lower.svg)"]
-  ]
+  globalStyles: {
+    'font-family': 'proxima-nova',
+    color: 'white',
+    'background-color': '#0055B1',
+    'background-image': 'url(https://www.crazyegg.com/assets/images/recordings/stars-lower.svg)'
+  }
 };
 
 document.addEventListener('DOMContentLoaded', function() {
