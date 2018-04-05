@@ -29,6 +29,7 @@
 //   },
 //   actions: actions,
 //   image: image,
+//   backgroundImage: backgroundImage,
 //   globalStyles: {}
 // }
 
@@ -59,11 +60,21 @@ const image = {
   source: 'https://www.crazyegg.com/assets/images/recordings/astronaut@2x.png'
 };
 
+const backgroundImage = {
+  source: 'https://www.crazyegg.com/assets/images/recordings/stars-lower.svg'
+}
+
 const content = {
   headline: 'Feeling lost?',
   content: 'Not sure which plan to pick? Try our Free Plan to get a taste of what Crazy Egg has to offer and see how we can improve your website, instantly. No credit card required. URUGUAY!',
   actions: actions,
-  image: image
+  image: image,
+  globalStyles: [
+    ["font-family", "proxima-nova"],
+    ["color", "white"],
+    ["background-color", "#0055B1"],
+    ["background-image", "url(https://www.crazyegg.com/assets/images/recordings/stars-lower.svg)"]
+  ]
 };
 
 document.addEventListener('DOMContentLoaded', function() {

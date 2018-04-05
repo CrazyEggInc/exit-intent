@@ -16,6 +16,7 @@ type alias Modal =
     , content : String
     , actions : List Action
     , image : Image
+    , globalStyles : List Style
     }
 
 
@@ -28,6 +29,10 @@ type alias Action =
 type alias Image =
     { source : String
     }
+
+
+type alias Style =
+    ( String, String )
 
 
 type Msg
@@ -52,7 +57,7 @@ initialModel =
 
 initialModal : Modal
 initialModal =
-    Modal "" "" [] initialImage
+    Modal "" "" [] initialImage []
 
 
 initialImage : Image
@@ -98,7 +103,7 @@ modal : Model -> Html Msg
 modal model =
     case model.isVisible of
         True ->
-            div [ class "modal", style modalStyle ] [ modalContainer model.modal, closeButton ]
+            div [ class "modal", style (modalStyle model.modal.globalStyles) ] [ modalContainer model.modal, closeButton ]
 
         _ ->
             text ""
@@ -173,19 +178,19 @@ closeButton =
 -- Styles
 
 
-modalStyle : List ( String, String )
-modalStyle =
-    [ ( "width", "100%" )
-    , ( "height", "100%" )
-    , ( "position", "fixed" )
-    , ( "top", "0" )
-    , ( "left", "0" )
-    , ( "background-color", "#0055B1" )
-    , ( "z-index", "99" )
-    , ( "color", "white" )
-    , ( "background-image", "url(https://www.crazyegg.com/assets/images/recordings/stars-lower.svg)" )
-    , ( "font-family", "proxima-nova" )
-    ]
+modalStyle : List Style -> List ( String, String )
+modalStyle globalStyles =
+    let
+        defaultStyles =
+            [ ( "width", "100%" )
+            , ( "height", "100%" )
+            , ( "position", "fixed" )
+            , ( "top", "0" )
+            , ( "left", "0" )
+            , ( "z-index", "99" )
+            ]
+    in
+    List.concat [ defaultStyles, globalStyles ]
 
 
 headlineWrapperStyle : List ( String, String )
