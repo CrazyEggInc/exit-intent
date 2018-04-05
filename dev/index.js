@@ -75,10 +75,19 @@ const image = {
   styles: []
 };
 
+const headline = {
+  text: 'Feeling lost?',
+  styles: []
+};
 
 const content = {
-  headline: 'Feeling lost?',
-  content: 'Not sure which plan to pick? Try our Free Plan to get a taste of what Crazy Egg has to offer and see how we can improve your website, instantly. No credit card required. URUGUAY!',
+  text: 'Not sure which plan to pick? Try our Free Plan to get a taste of what Crazy Egg has to offer and see how we can improve your website, instantly. No credit card required. URUGUAY!',
+  styles: []
+}
+
+const modalContent = {
+  headline: headline,
+  content: content,
   actions: actions,
   image: image,
   globalStyles: [
@@ -90,7 +99,7 @@ const content = {
 };
 
 document.addEventListener('DOMContentLoaded', function() {
-  const modal = new ExitIntent(content);
+  const modal = new ExitIntent(modalContent);
 
   modal.show();
 });

@@ -12,11 +12,17 @@ type alias Model =
 
 
 type alias Modal =
-    { headline : String
-    , content : String
+    { headline : Text
+    , content : Text
     , actions : List Action
     , image : Image
     , globalStyles : List Style
+    }
+
+
+type alias Text =
+    { text : String
+    , styles : List Style
     }
 
 
@@ -59,7 +65,17 @@ initialModel =
 
 initialModal : Modal
 initialModal =
-    Modal "" "" [] initialImage []
+    Modal initialHeadline initialContent [] initialImage []
+
+
+initialHeadline : Text
+initialHeadline =
+    Text "" []
+
+
+initialContent : Text
+initialContent =
+    Text "" []
 
 
 initialImage : Image
@@ -145,9 +161,9 @@ headlineWrapper content =
         [ headline content.headline ]
 
 
-headline : String -> Html Msg
+headline : Text -> Html Msg
 headline headlineText =
-    h1 [ style headlineStyle ] [ text headlineText ]
+    h1 [ style (headlineStyle headlineText.styles) ] [ text headlineText.text ]
 
 
 contentWrapper : Modal -> Html Msg
@@ -156,9 +172,9 @@ contentWrapper modal =
         [ contentBody modal.content ]
 
 
-contentBody : String -> Html Msg
+contentBody : Text -> Html Msg
 contentBody content =
-    p [ style contentBodyStyles ] [ text content ]
+    p [ style (contentBodyStyles content.styles) ] [ text content.text ]
 
 
 actionsWrapper : List Action -> Html Msg
@@ -200,14 +216,22 @@ headlineWrapperStyle =
     [ ( "margin-top", "50px" ) ]
 
 
-headlineStyle : List ( String, String )
-headlineStyle =
-    [ ( "margin-bottom", "15px" ) ]
+headlineStyle : List Style -> List ( String, String )
+headlineStyle styles =
+    let
+        defaultStyles =
+            [ ( "margin-bottom", "15px" ) ]
+    in
+    List.concat [ defaultStyles, styles ]
 
 
-contentBodyStyles : List ( String, String )
-contentBodyStyles =
-    []
+contentBodyStyles : List Style -> List ( String, String )
+contentBodyStyles styles =
+    let
+        defaultStyles =
+            []
+    in
+    List.concat [ defaultStyles, styles ]
 
 
 modalContainerStyle : List ( String, String )
