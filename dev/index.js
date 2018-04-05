@@ -71,12 +71,10 @@ const actions = [
 ];
 
 const image = {
-  source: 'https://www.crazyegg.com/assets/images/recordings/astronaut@2x.png'
+  source: 'https://www.crazyegg.com/assets/images/recordings/astronaut@2x.png',
+  styles: []
 };
 
-const backgroundImage = {
-  source: 'https://www.crazyegg.com/assets/images/recordings/stars-lower.svg'
-}
 
 const content = {
   headline: 'Feeling lost?',

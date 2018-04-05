@@ -29,6 +29,7 @@ type alias Action =
 
 type alias Image =
     { source : String
+    , styles : List Style
     }
 
 
@@ -63,7 +64,7 @@ initialModal =
 
 initialImage : Image
 initialImage =
-    Image ""
+    Image "" []
 
 
 init : ( Model, Cmd Msg )
@@ -135,7 +136,7 @@ contentRight content =
 
 imageWrapper : Image -> Html Msg
 imageWrapper image =
-    img [ src image.source, style imageStyle ] []
+    img [ src image.source, style (imageStyle image.styles) ] []
 
 
 headlineWrapper : Modal -> Html Msg
@@ -254,12 +255,16 @@ contentRightStyle =
     ]
 
 
-imageStyle : List ( String, String )
-imageStyle =
-    [ ( "width", "280px" )
-    , ( "float", "right" )
-    , ( "margin-top", "25%" )
-    ]
+imageStyle : List Style -> List ( String, String )
+imageStyle styles =
+    let
+        defaultStyles =
+            [ ( "width", "280px" )
+            , ( "float", "right" )
+            , ( "margin-top", "25%" )
+            ]
+    in
+    List.concat [ defaultStyles, styles ]
 
 
 actionsContainerStyle : List ( String, String )
