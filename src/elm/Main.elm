@@ -193,8 +193,8 @@ actionsWrapper actions =
 
 action : Action -> Html Msg
 action action =
-    li [ href action.location, style (actionStyle action.styles) ]
-        [ a [ href action.location ] [ text action.text ]
+    li [ href action.location, style actionWrapperStyle ]
+        [ a [ href action.location, style (actionStyle action.styles) ] [ text action.text ]
         ]
 
 
@@ -311,6 +311,14 @@ actionsContainerStyle =
     ]
 
 
+actionWrapperStyle : List ( String, String )
+actionWrapperStyle =
+    [ ( "list-style", "none" )
+    , ( "margin-top", "15px" )
+    , ( "text-align", "center" )
+    ]
+
+
 actionStyle : List Style -> List ( String, String )
 actionStyle styles =
     let
@@ -318,10 +326,8 @@ actionStyle styles =
             [ ( "padding", "10px" )
             , ( "width", "200px" )
             , ( "border-radius", "3px" )
-            , ( "list-style", "none" )
-            , ( "margin-top", "15px" )
-            , ( "text-align", "center" )
-            , ( "cursor", "pointer" )
+            , ( "display", "block" )
+            , ( "text-decoration", "none" )
             ]
     in
     List.concat [ defaultStyles, styles ]

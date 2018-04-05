@@ -4,7 +4,8 @@ const actions = [
     location: 'https://google.com',
     styles: {
       'box-shadow': '0px 2px 0px #00548C',
-      'background-color': '#0086E6'
+      'background-color': '#0086E6',
+
     }
   },
   {
@@ -12,7 +13,8 @@ const actions = [
     location: 'https://google.com',
     styles: {
       'box-shadow': '0px 2px 0px #768EA1',
-      'background-color': '#A2B9CA'
+      'background-color': '#A2B9CA',
+      color: '#fff'
     }
   }
 ];
