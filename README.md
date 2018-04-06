@@ -35,24 +35,21 @@ content = {
   styles: {}
 };
 
-const actions = [
-  {
-    text: 'Take me to the Free Plan',
-    location: 'https://google.com',
-    styles: [
-      ["box-shadow", "0px 2px 0px #00548C"],
-      ["background-color", "#0086E6"]
-    ]
-  },
-  {
-    text: "I'm not interested",
-    location: 'https://google.com',
-    styles: [
-      ["box-shadow", "0px 2px 0px #768EA1"],
-      ["background-color", "#A2B9CA"]
-    ]
+const actions = [{
+  text: 'Take me to the Free Plan',
+  location: 'https://google.com',
+  styles: {
+    "box-shadow": "0px 2px 0px #00548C",
+    "background-color": "#0086E6"
   }
-]
+}, {
+  text: "I'm not interested",
+  location: 'https://google.com',
+  styles: {
+    "box-shadow": "0px 2px 0px #768EA1",
+    "background-color": "#A2B9CA"
+  }
+}];
 
 const image = {
   source: 'https://ww.crazyegg.com/assets/images/recordings/astronaut@2x.png',
@@ -65,10 +62,12 @@ const modalContent = {
   actions: actions,
   image: image,
   globalConfig: {
-    'font-family': 'proxima-nova',
-    color: 'white',
-    'background-color': '#0055B1',
-    'background-image': 'url(https://www.crazyegg.com/assets/images/recordings/stars-lower.svg)'
+    styles: {
+      'font-family': 'proxima-nova',
+      color: 'white',
+      'background-color': '#0055B1',
+      'background-image': 'url(https://www.crazyegg.com/assets/images/recordings/stars-lower.svg)'
+    }
   }
 };
 
