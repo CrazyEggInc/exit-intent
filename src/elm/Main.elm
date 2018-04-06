@@ -247,11 +247,11 @@ contentBodyStyles styles =
 
 modalContainerStyle : List ( String, String )
 modalContainerStyle =
-    [ ( "width", "60%" )
+    [ ( "width", "835px" )
     , ( "height", "400px" )
     , ( "margin-left", "auto" )
     , ( "margin-right", "auto" )
-    , ( "margin-top", "20%" )
+    , ( "margin-top", "15%" )
     ]
 
 
@@ -263,9 +263,10 @@ contentWrapperStyle =
 closeModalStyle : List ( String, String )
 closeModalStyle =
     [ ( "position", "absolute" )
-    , ( "top", "10px" )
-    , ( "right", "25px" )
-    , ( "content", "✕" )
+    , ( "top", "20px" )
+    , ( "right", "30px" )
+    , ( "font-size", "40px")
+    , ( "color", "lightgray")
     , ( "cursor", "pointer" )
     ]
 
@@ -286,7 +287,7 @@ contentRightStyle =
     , ( "position", "relative" )
     , ( "padding", "15px" )
     , ( "box-sizing", "border-box" )
-    , ( "padding-left", "50px" )
+    , ( "padding-left", "70px" )
     ]
 
 
@@ -304,8 +305,7 @@ imageStyle styles =
 
 actionsContainerStyle : List ( String, String )
 actionsContainerStyle =
-    [ ( "position", "absolute" )
-    , ( "display", "block" )
+    [ ( "display", "block" )
     , ( "bottom", "70px" )
     , ( "padding-left", "0" )
     ]
@@ -324,10 +324,12 @@ actionStyle styles =
     let
         defaultStyles =
             [ ( "padding", "10px" )
-            , ( "width", "200px" )
-            , ( "border-radius", "3px" )
+            , ( "width", "280px" )
+            , ( "border-radius", "5px" )
             , ( "display", "block" )
             , ( "text-decoration", "none" )
+            , ( "color", "#FFF" )
+            , ( "font-weight", "600")
             ]
     in
     List.concat [ defaultStyles, styles ]
