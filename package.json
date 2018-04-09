@@ -5,7 +5,7 @@
   "main": "dist/exit-intent.js",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --content-base dev/ --mode development",
-    "build": "./node_modules/.bin/webpack --mode production"
+    "build": "./node_modules/.bin/webpack --config webpack.dist.config.js --mode production"
   },
   "repository": {
     "type": "git",
