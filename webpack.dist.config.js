@@ -18,7 +18,7 @@ module.exports = {
 		filename: 'exit-intent.js',
 		path: path.resolve(__dirname, 'dist'),
 		library: "ExitIntent",
-		libraryExport: "default"
+		libraryTarget: "umd"
 	},
 
 	module: {
