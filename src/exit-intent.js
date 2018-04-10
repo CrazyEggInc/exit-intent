@@ -11,6 +11,14 @@ class ExitIntent {
     this.modal = modal;
   }
 
+  actionEvent(eventHandler) {
+    this.modal.ports.actionEvent.subscribe(eventHandler);
+  }
+
+  closeEvent(eventHandler) {
+    this.modal.ports.closeEvent.subscribe(eventHandler);
+  }
+
   parseContent(contentProps) {
     for (let prop in contentProps) {
       let currentProp = contentProps[prop];

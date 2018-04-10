@@ -50,6 +50,7 @@ type alias Style =
 type Msg
     = UpdateModal Modal
     | UpdateVisible Bool
+    | HandleActionEvent Action
 
 
 main : Program Never Model Msg
@@ -105,10 +106,20 @@ subscriptions model =
         ]
 
 
+
+-- Ports
+
+
 port modalContent : (Modal -> msg) -> Sub msg
 
 
 port modalVisible : (Bool -> msg) -> Sub msg
+
+
+port actionEvent : Action -> Cmd msg
+
+
+port closeEvent : Bool -> Cmd msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -118,7 +129,10 @@ update msg model =
             ( { model | modal = modal }, Cmd.none )
 
         UpdateVisible bool ->
-            ( { model | isVisible = bool }, Cmd.none )
+            ( { model | isVisible = bool }, closeEvent bool )
+
+        HandleActionEvent action ->
+            ( model, actionEvent action )
 
 
 view : Model -> Html Msg
@@ -188,13 +202,13 @@ contentBody content =
 
 actionsWrapper : List Action -> Html Msg
 actionsWrapper actions =
-    ul [ class "actions", style actionsContainerStyle ] (List.map action actions)
+    ul [ class "actions", style actionsContainerStyle ] (List.map actionItem actions)
 
 
-action : Action -> Html Msg
-action action =
+actionItem : Action -> Html Msg
+actionItem action =
     li [ href action.location, style actionWrapperStyle ]
-        [ a [ href action.location, style (actionStyle action.styles) ] [ text action.text ]
+        [ a [ href action.location, style (actionStyle action.styles), onClick (HandleActionEvent action) ] [ text action.text ]
         ]
 
 
@@ -265,8 +279,8 @@ closeModalStyle =
     [ ( "position", "absolute" )
     , ( "top", "20px" )
     , ( "right", "30px" )
-    , ( "font-size", "40px")
-    , ( "color", "lightgray")
+    , ( "font-size", "40px" )
+    , ( "color", "lightgray" )
     , ( "cursor", "pointer" )
     ]
 
@@ -329,7 +343,7 @@ actionStyle styles =
             , ( "display", "block" )
             , ( "text-decoration", "none" )
             , ( "color", "#FFF" )
-            , ( "font-weight", "600")
+            , ( "font-weight", "600" )
             ]
     in
     List.concat [ defaultStyles, styles ]
