@@ -15,7 +15,7 @@ class ExitIntent {
     this.modal.ports.actionEvent.subscribe(eventHandler);
   }
 
-  closeEvent(eventHandler) {
+  didMount(eventHandler) {
     this.modal.ports.closeEvent.subscribe(eventHandler);
   }
 

@@ -214,7 +214,7 @@ actionItem action =
 
 closeButton : Html Msg
 closeButton =
-    a [ onClick (UpdateVisible False), class "modal-close", style closeModalStyle ] [ text "x" ]
+    a [ onClick (UpdateVisible False), style closeModalStyle ] [ text "x" ]
 
 
 
