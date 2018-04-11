@@ -33,6 +33,7 @@ type alias Text =
 type alias Action =
     { text : String
     , location : String
+    , event : String
     , styles : List Style
     }
 
@@ -208,7 +209,7 @@ actionsWrapper actions =
 actionItem : Action -> Html Msg
 actionItem action =
     li [ href action.location, style actionWrapperStyle ]
-        [ a [ href action.location, style (actionStyle action.styles), onClick (HandleActionEvent action) ] [ text action.text ]
+        [ a [ style (actionStyle action.styles), onClick (HandleActionEvent action) ] [ text action.text ]
         ]
 
 
@@ -344,6 +345,7 @@ actionStyle styles =
             , ( "text-decoration", "none" )
             , ( "color", "#FFF" )
             , ( "font-weight", "600" )
+            , ( "cursor", "pointer" )
             ]
     in
     List.concat [ defaultStyles, styles ]

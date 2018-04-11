@@ -2,6 +2,7 @@ const actions = [
   {
     text: 'Take me to the Free Plan',
     location: 'https://google.com',
+    event: 'redirect',
     styles: {
       'box-shadow': '0px 2px 0px #00548C',
       'background-color': '#0086E6',
@@ -11,6 +12,7 @@ const actions = [
   {
     text: "I'm not interested",
     location: 'https://google.com',
+    event: 'close',
     styles: {
       'box-shadow': '0px 2px 0px #768EA1',
       'background-color': '#A2B9CA',
@@ -56,6 +58,20 @@ const modalContent = {
 
 document.addEventListener('DOMContentLoaded', function() {
   const modal = new ExitIntent(modalContent);
+
+  modal.actionEvent(function (action) {
+    switch (action.event) {
+      case 'redirect':
+        location.href = action.location;
+        break;
+      case 'close':
+        modal.hide();
+        break;
+      default:
+        modal.hide()
+        break;
+    }
+  });
 
   modal.show();
 });
